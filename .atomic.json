@@ -1,0 +1,5 @@
+{
+  "cssDirectoryPath": "/assets/css/",
+  "extensions": [".html", ".vue"],
+  "selectedLanguages": ["html", "vue"]
+}
