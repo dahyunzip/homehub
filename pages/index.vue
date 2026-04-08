@@ -1,14 +1,18 @@
 <template>
-  <div>zzz</div>
+  <div class="home">
+    <h1>홈</h1>
+  </div>
 </template>
 
-<!-- pages/index.vue 에서 연동 테스트 -->
 <script setup lang="ts">
-const supabase = useSupabaseClient();
-
-const { data, error } = await supabase.auth.getSession();
-console.log("session:", data);
-console.log("error:", error);
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.home {
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+}
+</style>
