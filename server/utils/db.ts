@@ -1,12 +1,8 @@
 import { Sequelize } from 'sequelize'
 
-const dbUrl = process.env.DATABASE_URL
+const dbUrl = process.env.DATABASE_URL ?? ''
 
-if (!dbUrl) {
-  throw new Error('DATABASE_URL 환경변수가 설정되지 않았습니다.')
-}
-
-const sequelize = new Sequelize(dbUrl, {
+const sequelize = new Sequelize(dbUrl || 'postgres://localhost:5432/placeholder', {
   dialect: 'postgres',
   dialectOptions: {
     ssl: {
