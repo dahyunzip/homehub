@@ -1,3 +1,7 @@
 {
-  "vue.features.atomicCssCompletion.enable": false
+  "vue.features.atomicCssCompletion.enable": false,
+  "vue.server.diagnosticModel": "push",
+  "css.validate": false,
+  "scss.validate": false,
+  "volar.diagnostics.cssEnabled": false
 }

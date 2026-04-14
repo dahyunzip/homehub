@@ -2,20 +2,17 @@ import sequelize from '~/server/utils/db'
 
 export default defineEventHandler(async (event) => {
   const { groupId } = event.context.auth
-  const id = getRouterParam(event, 'id')
-  const { title, content, folder_id, is_pinned } = await readBody(event)
+  const id = event.context.params?.id
+  if (!id) throw createError({ statusCode: 400 })
 
-  if (!title?.trim()) {
-    throw createError({ statusCode: 400, message: '제목을 입력해주세요.' })
-  }
+  const { title, content, folder_id, is_pinned } = await readBody(event)
+  if (!title?.trim()) throw createError({ statusCode: 400, message: '제목을 입력해주세요.' })
 
   const [check] = await sequelize.query(
     `SELECT id FROM documents WHERE id = :id AND group_id = :groupId`,
     { replacements: { id, groupId } },
   )
-  if (!(check as any[]).length) {
-    throw createError({ statusCode: 404, message: '문서를 찾을 수 없습니다.' })
-  }
+  if (!(check as any[]).length) throw createError({ statusCode: 404, message: '문서를 찾을 수 없습니다.' })
 
   await sequelize.query(
     `UPDATE documents
