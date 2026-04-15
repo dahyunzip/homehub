@@ -8,6 +8,13 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: 'vercel',
+    externals: {
+      traceInclude: [
+        './node_modules/pg/**',
+        './node_modules/pg-hstore/**',
+        './node_modules/sequelize/**',
+      ],
+    },
   },
   compatibilityDate: '2024-01-01',
 })
