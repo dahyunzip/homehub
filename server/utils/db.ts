@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize'
+import 'pg' // Vercel NFT가 pg를 정적 추적하도록 강제 (Sequelize 내부의 require('pg') 대신)
 
 const dbUrl = process.env.DATABASE_URL ?? ''
 
