@@ -1,5 +1,6 @@
 import sequelize from '~/server/utils/db'
 import { v4 as uuidv4 } from 'uuid'
+import { notifyGroup } from '~/server/utils/push'
 
 export default defineEventHandler(async (event) => {
   const { userId, groupId } = event.context.auth
@@ -36,5 +37,12 @@ export default defineEventHandler(async (event) => {
      WHERE d.id = :id`,
     { replacements: { id } },
   )
-  return (rows as any[])[0]
+  const doc = (rows as any[])[0]
+
+  notifyGroup(groupId, userId, {
+    title: '새 문서',
+    body: `${doc.creator_name}: ${title.trim()}`,
+  }).catch(() => {})
+
+  return doc
 })

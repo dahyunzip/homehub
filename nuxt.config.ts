@@ -6,14 +6,20 @@ export default defineNuxtConfig({
   supabase: {
     redirect: false,
   },
+  runtimeConfig: {
+    public: {
+      vapidPublicKey: process.env.VAPID_PUBLIC_KEY ?? '',
+    },
+  },
   nitro: {
     preset: 'vercel',
     externals: {
-      external: ['pg', 'pg-hstore', 'sequelize'],
+      external: ['pg', 'pg-hstore', 'sequelize', 'web-push'],
       traceInclude: [
         './node_modules/pg/**',
         './node_modules/pg-hstore/**',
         './node_modules/sequelize/**',
+        './node_modules/web-push/**',
       ],
     },
   },
