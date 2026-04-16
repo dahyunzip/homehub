@@ -1,7 +1,7 @@
 import { verifyToken } from '~/server/utils/jwt'
 
 // /api/auth/* 경로는 인증 없이 통과
-const PUBLIC_PATHS = ['/api/auth/login', '/api/auth/logout']
+const PUBLIC_PATHS = ['/api/auth/login', '/api/auth/logout', '/api/auth/register']
 
 export default defineEventHandler((event) => {
   const path = getRequestURL(event).pathname

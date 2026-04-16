@@ -21,6 +21,11 @@
                     {{ loading ? "로그인 중..." : "로그인" }}
                 </button>
             </form>
+
+            <p class="register-link">
+                처음이신가요?
+                <NuxtLink to="/register">회원가입</NuxtLink>
+            </p>
         </div>
     </div>
 </template>
@@ -124,6 +129,23 @@ async function handleLogin() {
 .error-msg {
     font-size: 13px;
     color: var(--color-danger);
+}
+
+.register-link {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--color-text-muted);
+
+    a {
+        color: var(--color-primary);
+        font-weight: 600;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
 .btn-login {
