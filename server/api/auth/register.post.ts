@@ -9,18 +9,17 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, message: '모든 항목을 입력해주세요.' })
   }
 
-  const supabase = createClient(
+  const supabaseAdmin = createClient(
     process.env.SUPABASE_URL!,
-    process.env.SUPABASE_KEY!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
   )
 
-  // 1. Supabase Auth 회원가입 — options.data.name 은 트리거가 profiles.name 에 INSERT
-  const { data: authData, error: authError } = await supabase.auth.signUp({
+  // 1. Supabase Auth 회원가입 — email_confirm: true 로 이메일 인증 즉시 완료
+  const { data: authData, error: authError } = await supabaseAdmin.auth.admin.createUser({
     email: email.trim(),
     password,
-    options: {
-      data: { name: name.trim() },
-    },
+    email_confirm: true,
+    user_metadata: { name: name.trim() },
   })
 
   if (authError || !authData.user) {
